@@ -1,0 +1,44 @@
+<div id="stats">loading...</div>
+
+<script src="javascript-time-ago.2.5.4.js"></script>
+<script src="javascript-time-ago.locale.en.js"></script>
+<script src="human.readable.numbers.0.9.js"></script>
+<script src="jq-min.js"></script>
+<script>
+    ajax_p({url:'/get-total-stats'})
+    .then( stats => {
+      ajax_p({url:'/get-hw-stats'})
+      .then( hw_stats => {
+        ajax_p({url:'/ovpn/get'})
+        .then( data => {
+
+          var t = '<table><tr><th></th><th></th><th></th><th>m-rcv</th><th>m-sent</th><th>h-rcv</th><th>h-sent</th><th>d-rcv</th><th>d-sent</th><th>all-rcv</th><th>all-sent</th></tr>';
+          var lastUpdate;
+          stats.data.forEach( user => {
+            if (user.name === 'lastUpdate') {
+              lastUpdate = user.lastUpdate;
+            } else {
+              const deleted = (data.data.data.indexOf(user.name)===-1 && user.name !== "UNDEF" ? '<span style="font-size:8px">&#x274C</span>' : '');
+              const online =  (user.online ? '<span style="font-size:8px">&#x1F7E2</span>' : '');
+              t = t + '<tr>'+
+               '<td>' + online + '</td><td>' + deleted + '</td><td>' + user.name + '</td>'+
+               '<td>' + HRNumbers.toHumanString(user.m_rcv) + '</td><td>' + HRNumbers.toHumanString(user.m_sent) + '</td>'+
+               '<td>' + HRNumbers.toHumanString(user.h_rcv.tot) + '</td><td>' + HRNumbers.toHumanString(user.h_sent.tot) + '</td>'+
+               '<td>' + HRNumbers.toHumanString(user.d_rcv.tot) + '</td><td>' + HRNumbers.toHumanString(user.d_sent.tot) + '</td>'+
+               '<td>' + HRNumbers.toHumanString(user.all_rcv) + '</td><td>' + HRNumbers.toHumanString(user.all_sent) + '</td>'+
+             '</tr>';
+            }
+          })
+          t = t + '</table>'
+
+          t = t + '<br><br>('
+                     +'updated '+(new TimeAgo().format(new Date(lastUpdate)))+', '
+                     +hw_stats.data.disk_used_percent+'% disk, '
+                     +hw_stats.data.ram_used_percent+'% ram used'
+                  +')'
+
+          $('#stats')[0].innerHTML = t;
+        })
+      })
+    })
+</script>

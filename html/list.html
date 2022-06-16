@@ -1,0 +1,83 @@
+<div id="stats">loading...</div>
+
+<script src="jq-min.js"></script>
+<script>
+
+let prefix;
+
+function init() {
+    ajax_p({url:'/ovpn/get-prefix'})
+    .then( p => {
+      prefix = p.data.data;
+      ajax_p({url:'/ovpn/get'})
+      .then( data => {
+        var t = '<table><tr><th>name</th><th></th></tr>';
+        data.data.data.forEach( name => {
+            let deleteButton = name.startsWith(prefix) ? '<input type="button" id="delete_button_'+name+'" value="delete" onClick="onDelete(\''+name+'\')">' : '';
+            let nameLink = name.startsWith(prefix) ? '<a href="https://xyz123man.ru/keys/'+name+'.ovpn">'+name+'</a>' : name;
+            t = t + '<tr>'+
+             '<td>' + nameLink + '</td><td>' + deleteButton + '</td>'+
+           '</tr>';
+        })
+        t = t + '</table>'
+
+        t = t + '<br><br>' + prefix + '<input id="name" type="text" value="">&nbsp;<input id="name_button" type="button" value="+" onClick="onAdd()">'
+              + '<br><br><input id="week_button" type="button" value="week" onClick="onAddWeek()">'
+              + '<br><br>'
+
+        $('#stats')[0].innerHTML = t;
+      })
+    })
+}
+
+function onAdd() {
+  let name = $('#name')[0].value;
+  $('#name_button')[0].disabled = true;
+                                                
+  ajax_p({url:'/ovpn/add', data:{name}})
+    .then( res => {
+      $('#name_button')[0].disabled = false;
+      init();
+    })
+    .catch( err => {
+      console.log("ERROR", err);
+      alert("ERROR");
+      $('#name_button')[0].disabled = false;
+    })
+}
+
+
+function onAddWeek() {
+  $('#week_button')[0].disabled = true;
+
+  ajax_p({url:'/ovpn/add', data:{day:7}})
+    .then( res => {
+      $('#week_button')[0].disabled = false;
+      init();
+    })
+    .catch( err => {
+      console.log("ERROR", err);
+      alert("ERROR");
+      $('#week_button')[0].disabled = false;
+    })
+}
+
+
+
+function onDelete(name) {
+  $('#delete_button_'+name)[0].disabled = true;
+                                                
+  ajax_p({url:'/ovpn/remove', data:{name: name.replace(prefix, '')}})
+    .then( res => {
+      $('#delete_button_'+name)[0].disabled = false;
+      init();
+    })
+    .catch( err => {
+      console.log("ERROR", err);
+      alert("ERROR");
+      $('#delete_button_'+name)[0].disabled = false;
+    })
+}
+
+init();
+</script>
