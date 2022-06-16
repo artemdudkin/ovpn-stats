@@ -8,10 +8,11 @@ Proof-of-concept web server to control users and traffic of OpenVPN (uses [artem
 
 ## Installation and usage
 
-1. Download project and copy it to server where OpenVPN runs.
-2. `npm i`
-3. `node server.js` (or you can use PM2 process manager `pm2 start server.js --name stats`)
-4. Also, you should have configured OpenVPN management interface (i.e. `management localhost XXXX` at OpenVPN configs)
+2. Download project and copy it to server where OpenVPN runs.
+3. Get `OVPN_URL` - i.e. start [artemdudkin/ovpn-nyr-ctl](https://github.com/artemdudkin/ovpn-nyr-ctl) at the same server
+4. `npm i`
+5. `node server.js` (or you can use PM2 process manager `pm2 start server.js --name stats`)
+6. Also, you should have configured OpenVPN management interface (i.e. `management localhost XXXX` at OpenVPN configs)
 
   ## Configuration
 `SERVER_PORT`
