@@ -12,7 +12,7 @@ Proof-of-concept web server to control users and traffic of OpenVPN (using [arte
 npm install ovpn-stats
 ```
 
-Also, you should have configured OpenVPN management interface (i.e. `management localhost 7505` at OpenVPN configs)
+Also, you should have configured OpenVPN management interface (i.e. `management localhost XXXX` at OpenVPN configs)
 
 ## Usage
 
