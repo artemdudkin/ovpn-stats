@@ -6,19 +6,12 @@ Proof-of-concept web server to control users and traffic of OpenVPN (uses [artem
 3. Server removes expired users (if user have name according to `<prefix>-yyMMdd` template)
 4. Server calls web hooks on "first_connect" and "expired" user events.
 
-## Installation
+## Installation and usage
 
-```
-npm install ovpn-stats
-```
-
-Also, you should have configured OpenVPN management interface (i.e. `management localhost XXXX` at OpenVPN configs)
-
-## Usage
-
-```
-node server.js
-```
+1. Download project and copy it to server where OpenVPN runs.
+2. `npm i`
+3. `node server.js` (or you can use PM2 process manager `pm2 start server.js --name stats`)
+4. Also, you should have configured OpenVPN management interface (i.e. `management localhost XXXX` at OpenVPN configs)
 
   ## Configuration
 `SERVER_PORT`
