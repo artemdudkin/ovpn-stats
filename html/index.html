@@ -9,16 +9,18 @@
     .then( stats => {
       ajax_p({url:'/get-hw-stats'})
       .then( hw_stats => {
+        let data;
         ajax_p({url:'/ovpn/get'})
-        .then( data => {
-
+        .then( d => data = d)
+        .catch(e => {})
+        .then( () => {
           var t = '<table><tr><th></th><th></th><th></th><th>m-rcv</th><th>m-sent</th><th>h-rcv</th><th>h-sent</th><th>d-rcv</th><th>d-sent</th><th>all-rcv</th><th>all-sent</th></tr>';
           var lastUpdate;
           stats.data.forEach( user => {
             if (user.name === 'lastUpdate') {
               lastUpdate = user.lastUpdate;
             } else {
-              const deleted = (data.data.data.indexOf(user.name)===-1 && user.name !== "UNDEF" ? '<span style="font-size:8px">&#x274C</span>' : '');
+              const deleted = (data && data.data && data.data.data ? (data.data.data.indexOf(user.name)===-1 && user.name !== "UNDEF" ? '<span style="font-size:8px">&#x274C</span>' : '') : '<span style="font-size:8px">?</span>');
               const online =  (user.online ? '<span style="font-size:8px">&#x1F7E2</span>' : '');
               t = t + '<tr>'+
                '<td>' + online + '</td><td>' + deleted + '</td><td>' + user.name + '</td>'+

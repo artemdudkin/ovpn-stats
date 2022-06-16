@@ -28,6 +28,9 @@ function init() {
         $('#stats')[0].innerHTML = t;
       })
     })
+    .catch(e => {
+        $('#stats')[0].innerHTML = "Cannot get data";
+    })
 }
 
 function onAdd() {
