@@ -4,7 +4,7 @@ Proof-of-concept web server to control users and traffic of OpenVPN (using [arte
 1. Server collects traffic statistics (by parsing result of "status" command at OpenVPN management interface)
 2. You can create/delete OpenVPN users
 3. Server removes expired users (if user have name according to `<prefix>-yyMMdd` template)
-4. Server calls web hooks on "first_online" and "expired" user events.
+4. Server calls web hooks on "first_connect" and "expired" user events.
 
 ## Installation
 
