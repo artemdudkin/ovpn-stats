@@ -1,5 +1,5 @@
 # ovpn-stats
-Proof-of-concept web server to control users and traffic of OpenVPN (using [artemdudkin/ovpn-nyr-ctl](https://github.com/artemdudkin/ovpn-nyr-ctl)).
+Proof-of-concept web server to control users and traffic of OpenVPN (uses [artemdudkin/ovpn-nyr-ctl](https://github.com/artemdudkin/ovpn-nyr-ctl) and [Nyr/openvpn-install](https://github.com/Nyr/openvpn-install)).
 
 1. Server collects traffic statistics (by parsing result of "status" command at OpenVPN management interface)
 2. You can create/delete OpenVPN users
