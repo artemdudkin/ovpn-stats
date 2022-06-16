@@ -1,9 +1,10 @@
 # ovpn-stats
 Proof-of-concept web server to control users and traffic of OpenVPN (using [artemdudkin/ovpn-nyr-ctl](https://github.com/artemdudkin/ovpn-nyr-ctl)).
 
-1. You can create/delete OpenVPN users and collect traffic statistics.
-2. Also, server can delete expired users (if user have name according to `<prefix>-yyMMdd` template).
-3. Also, server can call web hooks on "first_online" and "expired" user events.
+1. Server collects traffic statistics
+2. You can create/delete OpenVPN users
+3. Server removes expired users (if user have name according to `<prefix>-yyMMdd` template)
+4. Server calls web hooks on "first_online" and "expired" user events.
 
 ## Installation
 
