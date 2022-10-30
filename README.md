@@ -26,3 +26,9 @@ Proof-of-concept web server to control users and traffic of OpenVPN.<br>
 | index.html  | list.html |
 | ------------- | ------------- |
 | <img src="https://raw.githubusercontent.com/artemdudkin/ovpn-stats/main/docs/stats-index.png" width="300">  | <img src="https://raw.githubusercontent.com/artemdudkin/ovpn-stats/main/docs/stats-list.png" width="150">  |
+
+## Troubleshooting
+
+1. `/usr/bin/env: ‘node’: No such file or directory` means that you did not installed node.js (or it does not avaliable for selected user)
+
+2. `Error: connect ECONNREFUSED 127.0.0.1:8989` means that you did not started OpenVPN management interface
