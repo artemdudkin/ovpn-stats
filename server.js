@@ -17,7 +17,7 @@ const { check_expired } = require('./expired');
 const SERVER_PORT = 8094;
 const OPENVPN_MANAGEMENT_PORT = 8989;
 const OVPN_URL = 'http://localhost:2222';
-const WEBHOOK_URL;
+const WEBHOOK_URL = '';
 
 utils.log('cwd dir == ' + process.cwd());
 utils.log("config dir == ", __dirname);
