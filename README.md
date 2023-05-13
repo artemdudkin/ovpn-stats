@@ -13,7 +13,7 @@ Proof-of-concept web server to control users and traffic of OpenVPN.<br>
  * Get `OVPN_URL` - i.e. start [artemdudkin/ovpn-nyr-ctl](https://github.com/artemdudkin/ovpn-nyr-ctl) at the same server
  * `npm i`
  * `node server.js` (or you can use PM2 process manager `pm2 start server.js --name stats`)
- * Also, you should have configured OpenVPN management interface (i.e. `management localhost XXXX` at OpenVPN configs)
+ * Also, you should have configured OpenVPN management interface (i.e. `management 127.0.0.1 XXXX` at OpenVPN configs, it is probably at /etc/openvpn/server/)
 
   ## Configuration
 `SERVER_PORT`
